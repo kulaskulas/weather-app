@@ -4,6 +4,5 @@
   will use the application outdoor with light reflections high contrast so it is best 
   that application is in dark theme.
 
-- I use monolithic approach for this application because it is a simple and small application only,i used the
-  laravel backend as api wrapper only to hide the api key for openweather since it is only free account and only limited
+- I used the laravel backend as api wrapper only to hide the api key for openweather since it is only free account and only limited
   request is available so i need to hide the api key, i put it in .env and accessed it in api.routes.
