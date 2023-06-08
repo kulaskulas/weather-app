@@ -22584,7 +22584,7 @@ var cur_loc = localStorage.getItem('loc'); // saved location from localstorage. 
       var _this = this;
       // _this.search_query = location_query
       clearTimeout(this.timer);
-      this.timer = setTimeout(function validate() {
+      _this.timer = setTimeout(function validate() {
         _this.axios.get("https://api.geoapify.com/v1/geocode/autocomplete?text=".concat(_this.search_query, "&format=json&apiKey=b9792a6d850a40b5a05253432d6be2de")).then(function (response) {
           _this.location_search_results = response.data.results;
         })["catch"](function (error) {

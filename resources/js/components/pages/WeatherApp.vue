@@ -99,7 +99,10 @@ import moment from 'moment'
                     current_date_dt : ''
                 },
 
-                five_day_forecast : [{date : moment().format('YYYY-MM-DD'), days : moment().format('dddd')}],
+                five_day_forecast : [
+                    {date : moment().format('YYYY-MM-DD'), days : moment().format('dddd')}
+                ],
+
                 curr_loop : 0,
                 location_search_results : [],
 
@@ -108,6 +111,7 @@ import moment from 'moment'
                     latitude : '',
                     longitude : '',
                 },
+
                 current_date : moment().format('YYYY-MM-DD')
             }
         },
@@ -124,7 +128,9 @@ import moment from 'moment'
             this.getThisWeekDates()
         },
 
-        components : {Loader, Forecast},
+        components : {
+            Loader, Forecast
+        },
         
         methods : {
             selectLocation (lat, lon, location) {
@@ -196,7 +202,7 @@ import moment from 'moment'
                 let _this = this
                 // _this.search_query = location_query
                 clearTimeout(this.timer);
-                this.timer=setTimeout(function validate(){
+                _this.timer=setTimeout(function validate(){
                     _this.axios.get(`https://api.geoapify.com/v1/geocode/autocomplete?text=${_this.search_query}&format=json&apiKey=b9792a6d850a40b5a05253432d6be2de`)
                     .then((response) => {
                         _this.location_search_results = response.data.results
