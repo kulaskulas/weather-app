@@ -15,7 +15,7 @@
                         focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 
                         dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                         dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Location" required
-                        @keyup="searchLocation($event.target.value)"
+                        @keyup="searchLocation"
                         >
                     </div>
                 </form>
@@ -46,7 +46,7 @@
                 <span>Current Weather</span>
             </div>
             <!-- <div>{{ convertUnixToDateTime(currentWeather.current_date_dt) }}</div> -->
-            <div class="current-weather flex item-center justify-between px-6 py-8" :class="{'hidden' : !currentWeather.current_date_dt}">
+            <div class="current-weather flex item-center justify-between px-6 pb-8" :class="{'hidden' : !currentWeather.current_date_dt}">
                 <div class="flex item-center">
                     <div>
                         <div class="text-6xl font-semibold">{{ roundTemp(currentWeather.temp) }}&#8451;</div>
@@ -198,9 +198,13 @@ import moment from 'moment'
                 })
             },
             
-            searchLocation(location_query) {
+            searchLocation() {
                 let _this = this
-                // _this.search_query = location_query
+
+                if (_this.search_query.trim().length == 0) {
+                    return false;
+                }
+
                 clearTimeout(this.timer);
                 _this.timer=setTimeout(function validate(){
                     _this.axios.get(`https://api.geoapify.com/v1/geocode/autocomplete?text=${_this.search_query}&format=json&apiKey=b9792a6d850a40b5a05253432d6be2de`)
@@ -209,7 +213,6 @@ import moment from 'moment'
                     })
                     .catch(function (error) {
                         console.log(error)
-                        // alert("Oops, something went wrong!")
                     })
                 },200);
                 

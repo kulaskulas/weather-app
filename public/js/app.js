@@ -22580,16 +22580,17 @@ var cur_loc = localStorage.getItem('loc'); // saved location from localstorage. 
         console.log(error);
       });
     },
-    searchLocation: function searchLocation(location_query) {
+    searchLocation: function searchLocation() {
       var _this = this;
-      // _this.search_query = location_query
+      if (_this.search_query.trim().length == 0) {
+        return false;
+      }
       clearTimeout(this.timer);
       _this.timer = setTimeout(function validate() {
         _this.axios.get("https://api.geoapify.com/v1/geocode/autocomplete?text=".concat(_this.search_query, "&format=json&apiKey=b9792a6d850a40b5a05253432d6be2de")).then(function (response) {
           _this.location_search_results = response.data.results;
         })["catch"](function (error) {
           console.log(error);
-          // alert("Oops, something went wrong!")
         });
       }, 200);
     },
@@ -22881,8 +22882,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "bg-gray-50 border border-gray-700 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
     placeholder: "Search Location",
     required: "",
-    onKeyup: _cache[1] || (_cache[1] = function ($event) {
-      return $options.searchLocation($event.target.value);
+    onKeyup: _cache[1] || (_cache[1] = function () {
+      return $options.searchLocation && $options.searchLocation.apply($options, arguments);
     })
   }, null, 544 /* HYDRATE_EVENTS, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search_query]])])], 32 /* HYDRATE_EVENTS */), $data.location_search_results.length > 0 && $data.search_query ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.location_search_results, function (result, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
@@ -22907,7 +22908,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'hidden': !$data.currentWeather.current_date_dt
     }])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.daysF($data.currentWeather.dt)), 1 /* TEXT */), _hoisted_13, _hoisted_14], 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>{{ convertUnixToDateTime(currentWeather.current_date_dt) }}</div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["current-weather flex item-center justify-between px-6 py-8", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["current-weather flex item-center justify-between px-6 pb-8", {
       'hidden': !$data.currentWeather.current_date_dt
     }])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.roundTemp($data.currentWeather.temp)) + "℃", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Feels like " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.roundTemp($data.currentWeather.feels)) + " ℃", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currentWeather.dsec_main), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currentWeather.location), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
