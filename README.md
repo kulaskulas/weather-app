@@ -6,3 +6,9 @@
 
 - I used the laravel backend as api wrapper only to hide the api key for openweather since it is only free account and only limited
   request is available so i need to hide the api key, i put it in .env and accessed it in api.routes.
+  
+  
+  Setup
+- composer install
+- npm install
+- npm run dev
