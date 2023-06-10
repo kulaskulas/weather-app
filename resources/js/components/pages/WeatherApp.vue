@@ -20,7 +20,7 @@
                     </div>
                 </form>
                 <div v-if="location_search_results.length > 0 && search_query" class="rounded-lg mt-2">
-                    <div class="bg-white w-[385px] px-3 border border-solid border-b-black cursor-pointer" v-for="(result, index) in location_search_results" :key="index">
+                    <div class="bg-white w-[385px] px-3 py-1 border border-solid border-b-black cursor-pointer" v-for="(result, index) in location_search_results" :key="index">
                         <div class="" @click="selectLocation(result.lat, result.lon, result.formatted)">
                             <span class="text-gray-800">{{ result.formatted }}</span>
                         </div>
